@@ -1,8 +1,12 @@
-.PHONY: help start stop restart build logs status clean backup restore test health
+.PHONY: help start stop restart build logs status clean backup restore test health borg-backup borg-restore borg-list borg-info
 
 COMPOSE = docker-compose
 BACKUP_SCRIPT = ./scripts/backup.sh
 RESTORE_SCRIPT = ./scripts/restore.sh
+BORG_BACKUP_SCRIPT = ./scripts/borg-scripts/borg-backup.sh
+BORG_RESTORE_SCRIPT = ./scripts/borg-scripts/borg-restore.sh
+BORG_LIST_SCRIPT = ./scripts/borg-scripts/borg-list.sh
+BORG_INFO_SCRIPT = ./scripts/borg-scripts/borg-info.sh
 
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
@@ -14,19 +18,35 @@ help:
 	@echo "TaskZilla - Команды управления"
 	@echo "========================================$(NC)"
 	@echo ""
-	@echo "$(YELLOW)start$(NC)          - Запустить все сервисы"
-	@echo "$(YELLOW)stop$(NC)           - Остановить все сервисы"
-	@echo "$(YELLOW)restart$(NC)        - Перезапустить сервисы"
-	@echo "$(YELLOW)build$(NC)          - Пересобрать образы"
-	@echo "$(YELLOW)status$(NC)         - Показать статус сервисов"
-	@echo "$(YELLOW)health$(NC)         - Проверить здоровье сервисов"
-	@echo "$(YELLOW)logs$(NC)           - Показать логи"
-	@echo "$(YELLOW)backup$(NC)         - Создать резервную копию"
-	@echo "$(YELLOW)restore$(NC)        - Восстановить из бэкапа"
-	@echo "$(YELLOW)test$(NC)           - Запустить тесты"
-	@echo "$(YELLOW)shell-web$(NC)      - Войти в контейнер API"
-	@echo "$(YELLOW)shell-db$(NC)       - Войти в контейнер БД"
-	@echo "$(YELLOW)psql$(NC)           - Подключиться к PostgreSQL"
+	@echo "$(YELLOW)Основные команды:$(NC)"
+	@echo "  start          - Запустить все сервисы"
+	@echo "  stop           - Остановить все сервисы"
+	@echo "  restart        - Перезапустить сервисы"
+	@echo "  build          - Пересобрать образы"
+	@echo "  status         - Показать статус сервисов"
+	@echo "  health         - Проверить здоровье сервисов"
+	@echo "  logs           - Показать логи"
+	@echo ""
+	@echo "$(YELLOW)Резервное копирование (pg_dump):$(NC)"
+	@echo "  backup         - Создать резервную копию (pg_dump)"
+	@echo "  restore        - Восстановить из бэкапа (pg_dump)"
+	@echo "  list-backups   - Список бэкапов pg_dump"
+	@echo ""
+	@echo "$(YELLOW)BorgBackup (дедупликация + шифрование):$(NC)"
+	@echo "  borg-backup    - Создать бэкап в Borg"
+	@echo "  borg-restore   - Восстановить из Borg"
+	@echo "  borg-list      - Список архивов Borg"
+	@echo "  borg-info      - Информация об архиве Borg"
+	@echo ""
+	@echo "$(YELLOW)Тестирование:$(NC)"
+	@echo "  test           - Быстрый тест API"
+	@echo "  test-full      - Полное тестирование"
+	@echo ""
+	@echo "$(YELLOW)Утилиты:$(NC)"
+	@echo "  shell-web      - Войти в контейнер API"
+	@echo "  shell-db       - Войти в контейнер БД"
+	@echo "  psql           - Подключиться к PostgreSQL"
+	@echo "  monitor        - Мониторинг ресурсов"
 	@echo ""
 
 start:
@@ -75,17 +95,69 @@ health:
 	@echo "$(YELLOW)API:$(NC)"
 	@curl -s http://localhost:5041/ > /dev/null && echo "$(GREEN)✓ API доступен$(NC)" || echo "$(RED)✗ API недоступен$(NC)"
 
+# Резервное копирование через pg_dump
 backup:
-	@echo "$(GREEN)Создание резервной копии...$(NC)"
+	@echo "$(GREEN)Создание резервной копии (pg_dump)...$(NC)"
 	@bash $(BACKUP_SCRIPT)
 
 restore:
-	@echo "$(YELLOW)Восстановление из бэкапа...$(NC)"
+	@echo "$(YELLOW)Восстановление из бэкапа (pg_dump)...$(NC)"
 	@bash $(RESTORE_SCRIPT)
 
 list-backups:
-	@echo "$(GREEN)Доступные бэкапы:$(NC)"
+	@echo "$(GREEN)Доступные бэкапы pg_dump:$(NC)"
 	@ls -lht backups/backup_*.sql.gz 2>/dev/null | nl || echo "Бэкапов нет"
+
+# BorgBackup команды
+borg-backup:
+	@echo "$(GREEN)Создание резервной копии через BorgBackup...$(NC)"
+	@bash $(BORG_BACKUP_SCRIPT)
+
+borg-restore:
+	@echo "$(YELLOW)Восстановление из BorgBackup...$(NC)"
+	@bash $(BORG_RESTORE_SCRIPT)
+
+borg-list:
+	@bash $(BORG_LIST_SCRIPT)
+
+borg-info:
+	@if [ -z "$(ARCHIVE)" ]; then \
+		echo "$(YELLOW)Использование: make borg-info ARCHIVE=имя_архива$(NC)"; \
+		echo ""; \
+		bash $(BORG_LIST_SCRIPT); \
+	else \
+		bash $(BORG_INFO_SCRIPT) $(ARCHIVE); \
+	fi
+
+# Тестирование полного цикла Borg
+borg-test:
+	@echo "$(GREEN)========================================$(NC)"
+	@echo "$(GREEN)Тестирование BorgBackup$(NC)"
+	@echo "$(GREEN)========================================$(NC)"
+	@echo ""
+	@echo "$(YELLOW)1. Создание тестовых данных...$(NC)"
+	@curl -s -X POST -H "Content-Type: application/json" -d '{"description": "Borg тест 1", "status": "в процессе"}' http://localhost:5041/tasks
+	@curl -s -X POST -H "Content-Type: application/json" -d '{"description": "Borg тест 2", "status": "завершено"}' http://localhost:5041/tasks
+	@echo ""
+	@echo "$(YELLOW)2. Создание бэкапа...$(NC)"
+	@make borg-backup
+	@echo ""
+	@echo "$(YELLOW)3. Удаление данных...$(NC)"
+	@for id in $$(curl -s http://localhost:5041/tasks | jq -r '.[].id'); do \
+		curl -s -X DELETE http://localhost:5041/tasks/$$id; \
+		echo "Удалена задача $$id"; \
+	done
+	@echo ""
+	@echo "$(YELLOW)4. Проверка пустой БД:$(NC)"
+	@curl -s http://localhost:5041/tasks
+	@echo ""
+	@echo "$(YELLOW)5. Восстановление...$(NC)"
+	@echo "yes" | make borg-restore
+	@echo ""
+	@echo "$(YELLOW)6. Проверка восстановленных данных:$(NC)"
+	@curl -s http://localhost:5041/tasks | jq
+	@echo ""
+	@echo "$(GREEN)✓ Тестирование завершено$(NC)"
 
 clean:
 	@echo "$(RED)ВНИМАНИЕ: Будут удалены ВСЕ данные!$(NC)"
@@ -112,8 +184,9 @@ psql:
 
 init:
 	@echo "$(GREEN)Инициализация проекта TaskZilla$(NC)"
-	@mkdir -p backups scripts
+	@mkdir -p backups scripts/borg-scripts
 	@chmod +x scripts/*.sh 2>/dev/null || true
+	@chmod +x scripts/borg-scripts/*.sh 2>/dev/null || true
 	@make build
 	@make start
 	@echo "$(GREEN)✓ Проект готов к работе!$(NC)"

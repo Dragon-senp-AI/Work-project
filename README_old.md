@@ -7,6 +7,7 @@
 # Отчет что всё выводит
 
 app@app-virtual-machine:~$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   180  100   180    0     0  15165      0 --:--:-- --:--:-- --:--:-- 16363
@@ -17,6 +18,7 @@ app@app-virtual-machine:~$ curl http://localhost:5041/tasks | jq
     "status": "в процессе"
   }
 ]
+
 app@app-virtual-machine:~$ curl -X POST -H "Content-Type: application/json" \
   -d '{"description": "Изучить Docker", "status": "в процессе"}' \
   http://localhost:5041/tasks
@@ -24,6 +26,7 @@ app@app-virtual-machine:~$ curl -X POST -H "Content-Type: application/json" \
 
 
 app@app-virtual-machine:~$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   322  100   322    0     0  28660      0 --:--:-- --:--:-- --:--:-- 29272
@@ -39,12 +42,14 @@ app@app-virtual-machine:~$ curl http://localhost:5041/tasks | jq
     "status": "в процессе"
   }
 ]
+
 app@app-virtual-machine:~$ curl -X PUT -H "Content-Type: application/json" \
   -d '{"description": "Домашка выполнена", "status": "завершено"}' \
   http://localhost:5041/tasks/1
 {"description":"\u0414\u043e\u043c\u0430\u0448\u043a\u0430 \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0430","id":1,"status":"\u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e"}
 
 app@app-virtual-machine:~$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   333  100   333    0     0  29009      0 --:--:-- --:--:-- --:--:-- 30272
@@ -64,6 +69,7 @@ app@app-virtual-machine:~$ curl http://localhost:5041/tasks | jq
 # Удаляем задачу
 
 app@app-virtual-machine:~$ curl -X DELETE http://localhost:5041/tasks/2 -v
+
 *   Trying 127.0.0.1:5041...
 * Connected to localhost (127.0.0.1) port 5041 (#0)
 > DELETE /tasks/2 HTTP/1.1
@@ -79,7 +85,9 @@ app@app-virtual-machine:~$ curl -X DELETE http://localhost:5041/tasks/2 -v
 < Date: Sat, 01 Nov 2025 20:15:31 GMT
 < 
 * Closing connection 0
+* 
 app@app-virtual-machine:~$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   191  100   191    0     0  12451      0 --:--:-- --:--:-- --:--:-- 12733
@@ -93,11 +101,14 @@ app@app-virtual-machine:~$ curl http://localhost:5041/tasks | jq
 
 
 # ЗАДАНИЕ 2
-# Перевести в контейнеры (Docker)
+# Перевести в контейнеры Docker
 
 app@app-virtual-machine:~/Work-project$ sudo systemctl stop postgresql
+
 app@app-virtual-machine:~/Work-project$ docker build -t taskzilla-api .
+
 app@app-virtual-machine:~/Work-project$ docker-compose up -d
+
 app@app-virtual-machine:~/Work-project$ docker images
 
 REPOSITORY                    TAG         IMAGE ID       CREATED          SIZE
@@ -109,10 +120,14 @@ gcr.io/k8s-minikube/kicbase   v0.0.48     c6b5532e987b   7 weeks ago      1.31GB
 app@app-virtual-machine:~/Work-project$ docker ps
 
 CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                    PORTS                                         NAMES
+
 c2e82d71405c   work-project_web     "python app.py"          18 minutes ago   Up 18 minutes             0.0.0.0:5041->5041/tcp, [::]:5041->5041/tcp   taskzilla-web
+
 e1692b76a936   postgres:14-alpine   "docker-entrypoint.s…"   18 minutes ago   Up 18 minutes (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   taskzilla-db
 
+
 # Проверка доступности контейнеров
+
 app@app-virtual-machine:~/Work-project$ docker exec taskzilla-web python -c "
 import socket
 try:
@@ -121,15 +136,19 @@ try:
 except:
     print('Ошибка: не удалось разрешить имя db')
 "
+
 Контейнер db доступен по адресу: 172.18.0.2
 
+
 # По DNS
+
 app@app-virtual-machine:~/Work-project$ docker exec taskzilla-web getent hosts db
 
 172.18.0.2      db
 
 
 # Проверка БД
+
 app@app-virtual-machine:~/Work-project$ curl -X POST -H "Content-Type: application/json" \
   -d '{"description": "Сделать домашку в Docker", "status": "в процессе"}' \
   http://localhost:5041/tasks
@@ -137,6 +156,7 @@ app@app-virtual-machine:~/Work-project$ curl -X POST -H "Content-Type: applicati
 
 
 app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   194  100   194    0     0  14574      0 --:--:-- --:--:-- --:--:-- 14923
@@ -152,7 +172,9 @@ app@app-virtual-machine:~/Work-project$ curl -X POST -H "Content-Type: applicati
   -d '{"description": "Изучить Docker Compose", "status": "в процессе"}' \
   http://localhost:5041/tasks
 {"description":"\u0418\u0437\u0443\u0447\u0438\u0442\u044c Docker Compose","id":2,"status":"\u0432 \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u0435"}
+
 app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   344  100   344    0     0  32264      0 --:--:-- --:--:-- --:--:-- 34400
@@ -168,11 +190,14 @@ app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
     "status": "в процессе"
   }
 ]
+
 app@app-virtual-machine:~/Work-project$ curl -X PUT -H "Content-Type: application/json" \
   -d '{"description": "Домашка в Docker выполнена", "status": "завершено"}' \
   http://localhost:5041/tasks/1
 {"description":"\u0414\u043e\u043c\u0430\u0448\u043a\u0430 \u0432 Docker \u0432\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0430","id":1,"status":"\u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e"}
+
 app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   355  100   355    0     0  20095      0 --:--:-- --:--:-- --:--:-- 20882
@@ -188,7 +213,9 @@ app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
     "status": "в процессе"
   }
 ]
+
 app@app-virtual-machine:~/Work-project$ curl -X DELETE http://localhost:5041/tasks/2 -v
+
 *   Trying 127.0.0.1:5041...
 * Connected to localhost (127.0.0.1) port 5041 (#0)
 > DELETE /tasks/2 HTTP/1.1
@@ -206,6 +233,7 @@ app@app-virtual-machine:~/Work-project$ curl -X DELETE http://localhost:5041/tas
 * Closing connection 0
 
 app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   205  100   205    0     0  17874      0 --:--:-- --:--:-- --:--:-- 20500
@@ -247,6 +275,7 @@ app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
 
 
 app@app-virtual-machine:~/Work-project$ ./scripts/backup.sh
+
 ==========================================
 Начало резервного копирования БД
 Время: 2025-11-02 00:17:23
@@ -275,7 +304,9 @@ total 4,0K
 # Удаление и Восстановление 
 
 app@app-virtual-machine:~/Work-project$ curl -X DELETE http://localhost:5041/tasks/4
+
 app@app-virtual-machine:~/Work-project$ curl -X DELETE http://localhost:5041/tasks/5
+
 app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -286,6 +317,7 @@ app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
 
 
 app@app-virtual-machine:~/Work-project$ ./scripts/restore.sh
+
 ==========================================
 Восстановление базы данных из бэкапа
 ==========================================
@@ -336,6 +368,7 @@ ERROR:  multiple primary keys for table "tasks" are not allowed
 
 
 app@app-virtual-machine:~/Work-project$ curl http://localhost:5041/tasks | jq
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   529  100   529    0     0  39351      0 --:--:-- --:--:-- --:--:-- 40692
@@ -365,6 +398,7 @@ crontab -e
 
 
 # ЗАДАЧА 4
+
 # Создал Makefile (УВАУУУУУ!!! Это пушка))))
 
 app@app-virtual-machine:~/Work-project$ make start
@@ -377,6 +411,7 @@ Creating taskzilla-web ... done
 ✓ Сервисы запущены
 
 app@app-virtual-machine:~/Work-project$ make status
+
 Статус контейнеров:
     Name                   Command                 State                        Ports                  
 -------------------------------------------------------------------------------------------------------

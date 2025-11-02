@@ -1,0 +1,224 @@
+========================================
+[0;32m[2025-11-02 16:48:16][0m Начало резервного копирования PostgreSQL
+========================================
+[0;32m[2025-11-02 16:48:16][0m ✓ Контейнер taskzilla-db работает
+[0;32m[2025-11-02 16:48:16][0m ✓ База данных доступна
+[0;32m[2025-11-02 16:48:16][0m Создание SQL дампа и архивация в Borg...
+pg_dump: last built-in OID is 16383
+pg_dump: reading extensions
+pg_dump: identifying extension members
+pg_dump: reading schemas
+pg_dump: reading user-defined tables
+pg_dump: reading user-defined functions
+pg_dump: reading user-defined types
+pg_dump: reading procedural languages
+pg_dump: reading user-defined aggregate functions
+pg_dump: reading user-defined operators
+pg_dump: reading user-defined access methods
+pg_dump: reading user-defined operator classes
+pg_dump: reading user-defined operator families
+pg_dump: reading user-defined text search parsers
+pg_dump: reading user-defined text search templates
+pg_dump: reading user-defined text search dictionaries
+pg_dump: reading user-defined text search configurations
+pg_dump: reading user-defined foreign-data wrappers
+pg_dump: reading user-defined foreign servers
+pg_dump: reading default privileges
+pg_dump: reading user-defined collations
+pg_dump: reading user-defined conversions
+pg_dump: reading type casts
+pg_dump: reading transforms
+pg_dump: reading table inheritance information
+pg_dump: reading event triggers
+pg_dump: finding extension tables
+pg_dump: finding inheritance relationships
+pg_dump: reading column info for interesting tables
+pg_dump: finding the columns and types of table "public.tasks"
+pg_dump: finding default expressions of table "public.tasks"
+pg_dump: flagging inherited columns in subtables
+pg_dump: reading partitioning data
+pg_dump: reading indexes
+pg_dump: reading indexes for table "public.tasks"
+pg_dump: flagging indexes in partitioned tables
+pg_dump: reading extended statistics
+pg_dump: reading constraints
+pg_dump: reading triggers
+pg_dump: reading rewrite rules
+pg_dump: reading policies
+pg_dump: reading row-level security policies
+pg_dump: reading publications
+pg_dump: reading publication membership
+pg_dump: reading subscriptions
+pg_dump: reading large objects
+pg_dump: reading dependency data
+pg_dump: saving encoding = UTF8
+pg_dump: saving standard_conforming_strings = on
+pg_dump: saving search_path = 
+pg_dump: creating TABLE "public.tasks"
+pg_dump: creating SEQUENCE "public.tasks_id_seq"
+pg_dump: creating SEQUENCE OWNED BY "public.tasks_id_seq"
+pg_dump: creating DEFAULT "public.tasks id"
+pg_dump: processing data for table "public.tasks"
+pg_dump: dumping contents of table "public.tasks"
+pg_dump: executing SEQUENCE SET tasks_id_seq
+pg_dump: creating CONSTRAINT "public.tasks tasks_pkey"
+Creating archive at "/home/app/Work-project/backups/borg-repo::postgres-2025-11-02_16-48-16"
+------------------------------------------------------------------------------
+Repository: /home/app/Work-project/backups/borg-repo
+Archive name: postgres-2025-11-02_16-48-16
+Archive fingerprint: 121bec8a89e74ef0b47852f18de552c06ad6eaf6864477e72eed8cb937b6679b
+Time (start): Sun, 2025-11-02 16:48:17
+Time (end):   Sun, 2025-11-02 16:48:17
+Duration: 0.00 seconds
+Number of files: 1
+Utilization of max. archive size: 0%
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+This archive:                3.22 kB              2.03 kB              2.03 kB
+All archives:                5.21 kB              2.89 kB              4.43 kB
+
+                       Unique chunks         Total chunks
+Chunk index:                       6                    6
+------------------------------------------------------------------------------
+[0;31m[2025-11-02 16:48:17] ERROR:[0m Ошибка при создании архива!
+========================================
+[0;32m[2025-11-02 16:49:22][0m Начало резервного копирования PostgreSQL
+========================================
+[0;32m[2025-11-02 16:49:22][0m ✓ Контейнер taskzilla-db работает
+[0;32m[2025-11-02 16:49:22][0m ✓ База данных доступна
+[0;32m[2025-11-02 16:49:22][0m Создание SQL дампа и архивация в Borg...
+Creating archive at "/home/app/Work-project/backups/borg-repo::postgres-2025-11-02_16-49-22"
+------------------------------------------------------------------------------
+Repository: /home/app/Work-project/backups/borg-repo
+Archive name: postgres-2025-11-02_16-49-22
+Archive fingerprint: 372da43f3f8cd3f3d5d0e69e0bd4d38dff14eda83f9fa10c23c94f0635a854a7
+Time (start): Sun, 2025-11-02 16:49:23
+Time (end):   Sun, 2025-11-02 16:49:23
+Duration: 0.00 seconds
+Number of files: 1
+Utilization of max. archive size: 0%
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+This archive:                2.81 kB              1.83 kB              1.83 kB
+All archives:                7.40 kB              4.13 kB              6.44 kB
+
+                       Unique chunks         Total chunks
+Chunk index:                       9                    9
+------------------------------------------------------------------------------
+[0;32m[2025-11-02 16:49:23][0m ✓ Архив успешно создан: postgres-2025-11-02_16-49-22
+[0;32m[2025-11-02 16:49:23][0m Прореживание старых архивов...
+Keeping archive (rule: daily #1):        postgres-2025-11-02_16-49-22         Sun, 2025-11-02 16:49:23 [372da43f3f8cd3f3d5d0e69e0bd4d38dff14eda83f9fa10c23c94f0635a854a7]
+Pruning archive (1/1):                   postgres-2025-11-02_16-48-16         Sun, 2025-11-02 16:48:17 [121bec8a89e74ef0b47852f18de552c06ad6eaf6864477e72eed8cb937b6679b]
+Keeping archive (rule: daily[oldest] #2): postgres-2025-11-02_16-33-32         Sun, 2025-11-02 16:33:33 [281b4a2cda3110663fa88736c38b69381697249ab3939485e92bf3334b06a642]
+[0;32m[2025-11-02 16:49:23][0m ✓ Прореживание завершено
+[0;32m[2025-11-02 16:49:23][0m Компактирование репозитория...
+[0;32m[2025-11-02 16:49:23][0m Информация о репозитории:
+Repository ID: e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+Location: /home/app/Work-project/backups/borg-repo
+Encrypted: Yes (repokey BLAKE2b)
+Cache: /home/app/.cache/borg/e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+Security dir: /home/app/.config/borg/security/e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+All archives:                4.80 kB              2.69 kB              4.23 kB
+
+                       Unique chunks         Total chunks
+Chunk index:                       6                    6
+========================================
+[0;32m[2025-11-02 16:49:24][0m Резервное копирование завершено успешно
+========================================
+
+========================================
+[0;32m[2025-11-02 16:55:05][0m Начало резервного копирования PostgreSQL
+========================================
+[0;32m[2025-11-02 16:55:05][0m ✓ Контейнер taskzilla-db работает
+[0;32m[2025-11-02 16:55:05][0m ✓ База данных доступна
+[0;32m[2025-11-02 16:55:05][0m Создание SQL дампа и архивация в Borg...
+Creating archive at "/home/app/Work-project/backups/borg-repo::postgres-2025-11-02_16-55-05"
+------------------------------------------------------------------------------
+Repository: /home/app/Work-project/backups/borg-repo
+Archive name: postgres-2025-11-02_16-55-05
+Archive fingerprint: eb812030e53b26ea61073879add0ce82c6a31e6048492edee59c384eee680f99
+Time (start): Sun, 2025-11-02 16:55:05
+Time (end):   Sun, 2025-11-02 16:55:05
+Duration: 0.01 seconds
+Number of files: 1
+Utilization of max. archive size: 0%
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+This archive:                2.88 kB              1.86 kB              1.86 kB
+All archives:                7.07 kB              3.95 kB              6.27 kB
+
+                       Unique chunks         Total chunks
+Chunk index:                       9                    9
+------------------------------------------------------------------------------
+[0;32m[2025-11-02 16:55:05][0m ✓ Архив успешно создан: postgres-2025-11-02_16-55-05
+[0;32m[2025-11-02 16:55:05][0m Прореживание старых архивов...
+Keeping archive (rule: daily #1):        postgres-2025-11-02_16-55-05         Sun, 2025-11-02 16:55:05 [eb812030e53b26ea61073879add0ce82c6a31e6048492edee59c384eee680f99]
+Pruning archive (1/1):                   postgres-2025-11-02_16-49-22         Sun, 2025-11-02 16:49:23 [372da43f3f8cd3f3d5d0e69e0bd4d38dff14eda83f9fa10c23c94f0635a854a7]
+Keeping archive (rule: daily[oldest] #2): postgres-2025-11-02_16-33-32         Sun, 2025-11-02 16:33:33 [281b4a2cda3110663fa88736c38b69381697249ab3939485e92bf3334b06a642]
+[0;32m[2025-11-02 16:55:06][0m ✓ Прореживание завершено
+[0;32m[2025-11-02 16:55:06][0m Компактирование репозитория...
+[0;32m[2025-11-02 16:55:06][0m Информация о репозитории:
+Repository ID: e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+Location: /home/app/Work-project/backups/borg-repo
+Encrypted: Yes (repokey BLAKE2b)
+Cache: /home/app/.cache/borg/e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+Security dir: /home/app/.config/borg/security/e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+All archives:                4.87 kB              2.71 kB              4.25 kB
+
+                       Unique chunks         Total chunks
+Chunk index:                       6                    6
+========================================
+[0;32m[2025-11-02 16:55:06][0m Резервное копирование завершено успешно
+========================================
+
+========================================
+[0;32m[2025-11-02 16:59:11][0m Начало резервного копирования PostgreSQL
+========================================
+[0;32m[2025-11-02 16:59:11][0m ✓ Контейнер taskzilla-db работает
+[0;32m[2025-11-02 16:59:11][0m ✓ База данных доступна
+[0;32m[2025-11-02 16:59:11][0m Создание SQL дампа и архивация в Borg...
+Creating archive at "/home/app/Work-project/backups/borg-repo::postgres-2025-11-02_16-59-11"
+------------------------------------------------------------------------------
+Repository: /home/app/Work-project/backups/borg-repo
+Archive name: postgres-2025-11-02_16-59-11
+Archive fingerprint: faa50623148b5aa4ad8100a14542dd5d7b3fca4bc242cfe7ff970601cc302152
+Time (start): Sun, 2025-11-02 16:59:12
+Time (end):   Sun, 2025-11-02 16:59:12
+Duration: 0.01 seconds
+Number of files: 1
+Utilization of max. archive size: 0%
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+This archive:                2.96 kB              1.88 kB              1.88 kB
+All archives:                7.22 kB              4.00 kB              6.31 kB
+
+                       Unique chunks         Total chunks
+Chunk index:                       9                    9
+------------------------------------------------------------------------------
+[0;32m[2025-11-02 16:59:12][0m ✓ Архив успешно создан: postgres-2025-11-02_16-59-11
+[0;32m[2025-11-02 16:59:12][0m Прореживание старых архивов...
+Keeping archive (rule: daily #1):        postgres-2025-11-02_16-59-11         Sun, 2025-11-02 16:59:12 [faa50623148b5aa4ad8100a14542dd5d7b3fca4bc242cfe7ff970601cc302152]
+Pruning archive (1/1):                   postgres-2025-11-02_16-55-05         Sun, 2025-11-02 16:55:05 [eb812030e53b26ea61073879add0ce82c6a31e6048492edee59c384eee680f99]
+Keeping archive (rule: daily[oldest] #2): postgres-2025-11-02_16-33-32         Sun, 2025-11-02 16:33:33 [281b4a2cda3110663fa88736c38b69381697249ab3939485e92bf3334b06a642]
+[0;32m[2025-11-02 16:59:12][0m ✓ Прореживание завершено
+[0;32m[2025-11-02 16:59:12][0m Компактирование репозитория...
+[0;32m[2025-11-02 16:59:12][0m Информация о репозитории:
+Repository ID: e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+Location: /home/app/Work-project/backups/borg-repo
+Encrypted: Yes (repokey BLAKE2b)
+Cache: /home/app/.cache/borg/e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+Security dir: /home/app/.config/borg/security/e007007f24841617885f1da71fd2ec8b047c83941b3c5464ad9cd913fc8015f3
+------------------------------------------------------------------------------
+                       Original size      Compressed size    Deduplicated size
+All archives:                4.95 kB              2.73 kB              4.27 kB
+
+                       Unique chunks         Total chunks
+Chunk index:                       6                    6
+========================================
+[0;32m[2025-11-02 16:59:13][0m Резервное копирование завершено успешно
+========================================
+
