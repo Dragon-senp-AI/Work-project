@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# Конфигурация
-BACKUP_DIR="/home/app/Work-project/backups"
-CONTAINER_NAME="taskzilla-db"
-DB_NAME="tasksdb"
-DB_USER="taskuser"
-DB_PASSWORD="taskpass123"
+# Загрузка переменных из .env
+ENV_FILE="$HOME/Work-project/.env"
+if [ ! -f "$ENV_FILE" ]; then
+    echo "ERROR: Файл .env не найден: $ENV_FILE"
+    echo "Создайте файл .env на основе .env.example"
+    exit 1
+fi
 
 echo "=========================================="
 echo "Восстановление базы данных из бэкапа"
