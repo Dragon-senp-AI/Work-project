@@ -1,19 +1,35 @@
 from flask import Flask, request, jsonify
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import os
+import sys
 
 app = Flask(__name__)
 
-
 def get_db_connection():
-    conn = psycopg2.connect(
-        dbname="tasksdb",
-        user="taskuser",
-        password="dbpass",
-        host="db",
-        port="5432"
-    )
-    return conn
+    """Подключение к БД с использованием переменных окружения"""
+    
+    # Проверка обязательных переменных
+    required_vars = ['POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD', 'POSTGRES_HOST']
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    
+    if missing_vars:
+        print(f"ERROR: Отсутствуют обязательные переменные окружения: {', '.join(missing_vars)}")
+        print("Убедитесь, что файл .env загружен!")
+        sys.exit(1)
+    
+    try:
+        conn = psycopg2.connect(
+            dbname=os.getenv('POSTGRES_DB'),
+            user=os.getenv('POSTGRES_USER'),
+            password=os.getenv('POSTGRES_PASSWORD'),
+            host=os.getenv('POSTGRES_HOST'),
+            port=os.getenv('POSTGRES_PORT', '5432')
+        )
+        return conn
+    except psycopg2.Error as e:
+        print(f"ERROR: Не удалось подключиться к базе данных: {e}")
+        sys.exit(1)
 
 @app.route('/')
 def index():
@@ -27,7 +43,6 @@ def get_tasks():
         tasks = cur.fetchall()
     conn.close()
     return jsonify(tasks)
-
 
 @app.route('/tasks', methods=['POST'])
 def create_task():
@@ -70,4 +85,5 @@ def delete_task(task_id):
     return '', 204
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5041)
+    port = int(os.getenv('FLASK_PORT', 5041))
+    app.run(host='0.0.0.0', port=port)

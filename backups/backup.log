@@ -45,3 +45,135 @@ Error response from daemon: container 79acbce7e6323d8c5437ce9c2bf1ea849e6769b0eb
 ==========================================
 Резервное копирование завершено
 ==========================================
+==========================================
+Начало резервного копирования БД
+Время: 2025-11-02 18:00:01
+==========================================
+✓ Бэкап успешно создан: /home/app/Work-project/backups/backup_tasksdb_20251102_180001.sql
+✓ Размер файла: 4,0K
+✓ Бэкап сжат: /home/app/Work-project/backups/backup_tasksdb_20251102_180001.sql.gz
+✓ Размер после сжатия: 4,0K
+
+Очистка старых бэкапов (оставляем последние 5)...
+✓ Всего бэкапов: 5 (чистка не требуется)
+
+Текущие бэкапы:
+/home/app/Work-project/backups/backup_tasksdb_20251102_001723.sql.gz (965)
+/home/app/Work-project/backups/backup_tasksdb_20251102_004300.sql.gz (967)
+/home/app/Work-project/backups/backup_tasksdb_20251102_010001.sql.gz (967)
+/home/app/Work-project/backups/backup_tasksdb_20251102_170001.sql.gz (972)
+/home/app/Work-project/backups/backup_tasksdb_20251102_180001.sql.gz (974)
+
+==========================================
+Резервное копирование завершено
+==========================================
+==========================================
+Начало резервного копирования БД
+Время: 2025-11-02 19:00:01
+==========================================
+✓ Бэкап успешно создан: /home/app/Work-project/backups/backup_tasksdb_20251102_190001.sql
+✓ Размер файла: 4,0K
+✓ Бэкап сжат: /home/app/Work-project/backups/backup_tasksdb_20251102_190001.sql.gz
+✓ Размер после сжатия: 4,0K
+
+Очистка старых бэкапов (оставляем последние 5)...
+✓ Удален старый бэкап: backup_tasksdb_20251102_001723.sql.gz
+
+Текущие бэкапы:
+/home/app/Work-project/backups/backup_tasksdb_20251102_004300.sql.gz (967)
+/home/app/Work-project/backups/backup_tasksdb_20251102_010001.sql.gz (967)
+/home/app/Work-project/backups/backup_tasksdb_20251102_170001.sql.gz (972)
+/home/app/Work-project/backups/backup_tasksdb_20251102_180001.sql.gz (974)
+/home/app/Work-project/backups/backup_tasksdb_20251102_190001.sql.gz (973)
+
+==========================================
+Резервное копирование завершено
+==========================================
+==========================================
+Начало резервного копирования БД
+Время: 2025-11-02 20:00:01
+==========================================
+✓ Бэкап успешно создан: /home/app/Work-project/backups/backup_tasksdb_20251102_200001.sql
+✓ Размер файла: 4,0K
+✓ Бэкап сжат: /home/app/Work-project/backups/backup_tasksdb_20251102_200001.sql.gz
+✓ Размер после сжатия: 4,0K
+
+Очистка старых бэкапов (оставляем последние 5)...
+✓ Удален старый бэкап: backup_tasksdb_20251102_004300.sql.gz
+
+Текущие бэкапы:
+/home/app/Work-project/backups/backup_tasksdb_20251102_010001.sql.gz (967)
+/home/app/Work-project/backups/backup_tasksdb_20251102_170001.sql.gz (972)
+/home/app/Work-project/backups/backup_tasksdb_20251102_180001.sql.gz (974)
+/home/app/Work-project/backups/backup_tasksdb_20251102_190001.sql.gz (973)
+/home/app/Work-project/backups/backup_tasksdb_20251102_200001.sql.gz (972)
+
+==========================================
+Резервное копирование завершено
+==========================================
+==========================================
+Начало резервного копирования БД
+Время: 2025-11-02 21:00:01
+==========================================
+✓ Бэкап успешно создан: /home/app/Work-project/backups/backup_tasksdb_20251102_210001.sql
+✓ Размер файла: 4,0K
+✓ Бэкап сжат: /home/app/Work-project/backups/backup_tasksdb_20251102_210001.sql.gz
+✓ Размер после сжатия: 4,0K
+
+Очистка старых бэкапов (оставляем последние 5)...
+✓ Удален старый бэкап: backup_tasksdb_20251102_010001.sql.gz
+
+Текущие бэкапы:
+/home/app/Work-project/backups/backup_tasksdb_20251102_170001.sql.gz (972)
+/home/app/Work-project/backups/backup_tasksdb_20251102_180001.sql.gz (974)
+/home/app/Work-project/backups/backup_tasksdb_20251102_190001.sql.gz (973)
+/home/app/Work-project/backups/backup_tasksdb_20251102_200001.sql.gz (972)
+/home/app/Work-project/backups/backup_tasksdb_20251102_210001.sql.gz (971)
+
+==========================================
+Резервное копирование завершено
+==========================================
+==========================================
+Начало резервного копирования БД
+Время: 2025-11-02 22:00:01
+==========================================
+✓ Бэкап успешно создан: /home/app/Work-project/backups/backup_tasksdb_20251102_220001.sql
+✓ Размер файла: 4,0K
+✓ Бэкап сжат: /home/app/Work-project/backups/backup_tasksdb_20251102_220001.sql.gz
+✓ Размер после сжатия: 4,0K
+
+Очистка старых бэкапов (оставляем последние 5)...
+✓ Удален старый бэкап: backup_tasksdb_20251102_170001.sql.gz
+
+Текущие бэкапы:
+/home/app/Work-project/backups/backup_tasksdb_20251102_180001.sql.gz (974)
+/home/app/Work-project/backups/backup_tasksdb_20251102_190001.sql.gz (973)
+/home/app/Work-project/backups/backup_tasksdb_20251102_200001.sql.gz (972)
+/home/app/Work-project/backups/backup_tasksdb_20251102_210001.sql.gz (971)
+/home/app/Work-project/backups/backup_tasksdb_20251102_220001.sql.gz (975)
+
+==========================================
+Резервное копирование завершено
+==========================================
+==========================================
+Начало резервного копирования БД
+Время: 2025-11-02 23:00:01
+==========================================
+✓ Бэкап успешно создан: /home/app/Work-project/backups/backup_tasksdb_20251102_230001.sql
+✓ Размер файла: 4,0K
+✓ Бэкап сжат: /home/app/Work-project/backups/backup_tasksdb_20251102_230001.sql.gz
+✓ Размер после сжатия: 4,0K
+
+Очистка старых бэкапов (оставляем последние 5)...
+✓ Удален старый бэкап: backup_tasksdb_20251102_180001.sql.gz
+
+Текущие бэкапы:
+/home/app/Work-project/backups/backup_tasksdb_20251102_190001.sql.gz (973)
+/home/app/Work-project/backups/backup_tasksdb_20251102_200001.sql.gz (972)
+/home/app/Work-project/backups/backup_tasksdb_20251102_210001.sql.gz (971)
+/home/app/Work-project/backups/backup_tasksdb_20251102_220001.sql.gz (975)
+/home/app/Work-project/backups/backup_tasksdb_20251102_230001.sql.gz (974)
+
+==========================================
+Резервное копирование завершено
+==========================================

@@ -49,10 +49,14 @@ help:
 	@echo "  monitor        - Мониторинг ресурсов"
 	@echo ""
 
-start:
+
+start: check-env
 	@echo "$(GREEN)Запуск сервисов...$(NC)"
 	$(COMPOSE) up -d
 	@echo "$(GREEN)✓ Сервисы запущены$(NC)"
+
+check-env:
+	@bash scripts/check-env.sh	
 
 stop:
 	@echo "$(YELLOW)Остановка сервисов...$(NC)"
